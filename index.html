@@ -226,26 +226,39 @@
                 border-radius: 4px;
                 padding: 10px;
                 background-color: #f9fafb;
+                overflow: visible;
             }
             
             td {
-                padding: 8px 0 8px 100px;
+                display: flex;
+                flex-direction: column;
+                padding: 0;
                 position: relative;
                 border: none;
                 text-align: left;
-                padding-left: 40%;
-                min-height: 20px;
+                margin-bottom: 8px;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            td:last-child {
+                margin-bottom: 0;
             }
             
             td:before {
                 content: attr(data-label);
-                position: absolute;
-                left: 10px;
                 font-weight: bold;
                 color: #2c5282;
-                font-size: 13px;
-                width: 35%;
-                text-align: left;
+                font-size: 12px;
+                margin-bottom: 3px;
+                display: block;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            td:after {
+                content: '';
+                display: block;
             }
             
             th {
