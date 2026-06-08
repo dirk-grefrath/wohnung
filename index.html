@@ -195,6 +195,64 @@
             padding-top: 10px;
         }
 
+        /* Mobile Responsive - Tabellen Anpassung */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            
+            table {
+                border-collapse: separate;
+                border-spacing: 0;
+                margin: 15px 0;
+                border: none;
+            }
+            
+            thead {
+                display: none;
+            }
+            
+            tr {
+                margin-bottom: 15px;
+                border: 1px solid #d0d8e0;
+                border-radius: 4px;
+                padding: 10px;
+                background-color: #f9fafb;
+            }
+            
+            td {
+                padding: 8px 0 8px 100px;
+                position: relative;
+                border: none;
+                text-align: left;
+                padding-left: 40%;
+                min-height: 20px;
+            }
+            
+            td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                font-weight: bold;
+                color: #2c5282;
+                font-size: 13px;
+                width: 35%;
+                text-align: left;
+            }
+            
+            th {
+                display: none;
+            }
+        }
+
         /* Optimierung für den PDF-Export / Druck */
         @media print {
             body {
@@ -296,31 +354,31 @@
     <table>
         <tr>
             <th>Etage:</th>
-            <td>2. Geschoss (Dachgeschoss)</td>
+            <td data-label="Etage:">2. Geschoss (Dachgeschoss)</td>
         </tr>
         <tr>
             <th>Verfügbar ab:</th>
-            <td>Voraussichtlich ab 01.11.2026 (Bezug nach Absprache)</td>
+            <td data-label="Verfügbar ab:">Voraussichtlich ab 01.11.2026 (Bezug nach Absprache)</td>
         </tr>
         <tr>
             <th>Baujahr Gebäude:</th>
-            <td>1973</td>
+            <td data-label="Baujahr Gebäude:">1973</td>
         </tr>
         <tr>
             <th>Heizungsart:</th>
-            <td>Zentralheizung (Gas, erneuert 2015)</td>
+            <td data-label="Heizungsart:">Zentralheizung (Gas, erneuert 2015)</td>
         </tr>
         <tr>
             <th>Energieausweistyp:</th>
-            <td>Verbrauchsausweis</td>
+            <td data-label="Energieausweistyp:">Verbrauchsausweis</td>
         </tr>
         <tr>
             <th>Endenergieverbrauch:</th>
-            <td>104,20 kWh/(m²·a)</td>
+            <td data-label="Endenergieverbrauch:">104,20 kWh/(m²·a)</td>
         </tr>
         <tr>
             <th>Energieeffizienzklasse:</th>
-            <td>D</td>
+            <td data-label="Energieeffizienzklasse:">D</td>
         </tr>
     </table>
 
@@ -328,27 +386,27 @@
     <table>
         <tr>
             <th>Nettokaltmiete:</th>
-            <td>775,00 €</td>
+            <td data-label="Nettokaltmiete:">775,00 €</td>
         </tr>
         <tr>
             <th>Nebenkostenvorauszahlung:</th>
-            <td>170,00 €</td>
+            <td data-label="Nebenkostenvorauszahlung:">170,00 €</td>
         </tr>
         <tr>
             <th>Heizkosten:</th>
-            <td>In den Nebenkosten enthalten</td>
+            <td data-label="Heizkosten:">In den Nebenkosten enthalten</td>
         </tr>
         <tr>
             <th>Gesamtmiete (Wohnung warm):</th>
-            <td><strong>945,00 €</strong></td>
+            <td data-label="Gesamtmiete (Wohnung warm):"><strong>945,00 €</strong></td>
         </tr>
         <tr>
             <th>Garage (separater Mietvertrag):</th>
-            <td>90,00 €</td>
+            <td data-label="Garage (separater Mietvertrag):">90,00 €</td>
         </tr>
         <tr>
             <th>Kaution:</th>
-            <td>2.325,00 € (3 Nettokaltmieten)</td>
+            <td data-label="Kaution:">2.325,00 € (3 Nettokaltmieten)</td>
         </tr>
     </table>
 
