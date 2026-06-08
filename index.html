@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vermietung - Schwalbenweg, Neuss Grefrath</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        /* Allgemeine Formatierung für Bildschirm und Druck */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;  
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        h1 {
+            color: #1a365d;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 10px;
+            font-size: 24px;
+            margin-top: 0;
+        }
+        h2 {
+            color: #2b6cb0;
+            font-size: 18px;
+            margin-top: 30px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #4a5568;
+            font-size: 15px;
+            margin-top: 20px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .highlight-box {
+            background-color: #ebf8ff;
+            border-left: 4px solid #3182ce;
+            padding: 15px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .highlight-item {
+            flex: 1;
+            min-width: 150px;
+            margin: 5px 0;
+        }
+        .highlight-item strong {
+            display: block;
+            color: #2c5282;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        .highlight-item span {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        th {
+            background-color: #f7fafc;
+            color: #4a5568;
+            width: 45%;
+        }
+        ul {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+
+        /* Link-Styling für Telefon und E-Mail */
+        .contact-link {
+            color: #2b6cb0;
+            text-decoration: none;
+        }
+        .contact-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Styling für die Bildergalerie und den Grundriss */
+        .single-image-box {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .single-image-box img {
+            width: 100%;
+            max-width: 550px;
+            height: auto;
+            border: 1px solid #ddd;
+            padding: 5px;
+            background: #fff;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .single-image-box img:hover {
+            opacity: 0.9;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 5px;
+            margin-bottom: 25px;
+        }
+        .image-item {
+            border: 1px solid #ddd;
+            padding: 4px;
+            background: #fff;
+            position: relative;
+        }
+        .image-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        .image-item img:hover {
+            opacity: 0.9;
+            transform: scale(1.01);
+        }
+        .image-label {
+            font-size: 11px;
+            font-weight: bold;
+            color: #718096;
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        /* --- LIGHTBOX STYLING (Großansicht beim Klicken) --- */
+        .lightbox {
+            display: none; /* Standardmäßig unsichtbar */
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            border-radius: 4px;
+            cursor: default;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .footer-note {
+            font-size: 12px;
+            color: #718096;
+            margin-top: 40px;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 10px;
+        }
+
+        /* Optimierung für den PDF-Export / Druck */
+        @media print {
+            body {
+                background-color: #fff;
+                padding: 0;
+            }
+            .container {
+                border: none;
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+            }
+            h2, h3 {
+                page-break-after: avoid;
+            }
+            table, tr, li, .image-item, .single-image-box, .image-grid {
+                page-break-inside: avoid;
+            }
+            .image-grid {
+                gap: 10px;
+            }
+            /* Lightbox im Druck verstecken */
+            .lightbox {
+                display: none !important;
+            }
+            /* Links beim Drucken schwarz färben und Unterstreichung entfernen */
+            .contact-link {
+                color: #333 !important;
+                text-decoration: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Lichtdurchflutete 3-Zimmer-Dachgeschosswohnung mit sonniger Loggia in Neuss-Grefrath</h1>
+    
+    <p><strong>Objektadresse:</strong> Schwalbenweg, 41472 Neuss (Grefrath)</p>
+
+    <div class="highlight-box">
+        <div class="highlight-item">
+            <strong>Wohnfläche</strong>
+            <span>ca. 72 m²</span>
+        </div>
+        <div class="highlight-item">
+            <strong>Zimmer</strong>
+            <span>3</span>
+        </div>
+        <div class="highlight-item">
+            <strong>Kaltmiete</strong>
+            <span>775,00 €</span>
+        </div>
+        <div class="highlight-item">
+            <strong>Nebenkosten</strong>
+            <span>170,00 €</span>
+        </div>
+    </div>
+
+    <h2>Objektbeschreibung</h2>
+    <p>
+        Diese sehr gepflegte und gemütliche 3-Zimmer-Wohnung befindet sich im 2. Obergeschoss (Dachgeschoss) eines Mehrfamilienhauses mit nur 9 Parteien. Das im Jahr 1973 in Massivbauweise errichtete Gebäude besticht schon beim Betreten durch einen gepflegten Hausflur, der mit zeitlosem Marmor ausgelegt ist. Die Gas-Zentralheizung wurde im Jahr 2015 modernisiert.
+    </p>
+    <p>
+        Die Wohnung überzeugt mit einer modernen Ausstattung und hellen, lichtdurchfluteten Räumen. Sie eignet sich ideal für Singles, Paare oder die kleine Familie. Vom geräumigen Wohnzimmer aus haben Sie direkten Zugang auf die einladende, sonnige Loggia, die dank einer praktischen Markise optimal beschattet werden kann.
+    </p>
+
+    <h2>Ausstattung & Besonderheiten</h2>
+    <ul>
+        <li><strong>Wohnzimmer:</strong> Großzügig geschnitten, mit Zugang zur sonnigen Loggia inklusive Markise.</li>
+        <li><strong>Küche:</strong> Geräumig, inklusive einer modernen Einbauküche (verbleibt in der Wohnung) sowie Platz für einen gemütlichen Essbereich. Ausgestattet mit pflegeleichtem Laminatboden.</li>
+        <li><strong>Badezimmer:</strong> Vor wenigen Jahren komplett modernisiert – elegantes Design in Weiß-Anthrazit mit einer barrierearmen, begehbaren Dusche und modernen Fliesen.</li>
+        <li><strong>Bodenbeläge:</strong> Hochwertiger, einheitlicher Laminatboden in allen Wohnräumen sowie in der Küche; zeitlose Fliesen im Badezimmer.</li>
+        <li><strong>Fenster:</strong> Isolierverglaste Kunststofffenster mit Rollladen.</li>
+        <li><strong>Garage:</strong> Eine eigene Garage steht zur Verfügung und kann zusätzlich angemietet werden.</li>
+        <li><strong>Keller & Gemeinschaftsräume:</strong> Ein zusätzlicher, eigener Kellerraum sorgt für extra Stauraum. Im Keller befindet sich zudem ein praktischer, gemeinschaftlicher Waschraum. Für Fahrräder steht eine Abstellmöglichkeit in der Gemeinschaftsgarage bereit.</li>
+    </ul>
+
+    <h2>Lagebeschreibung: Lebensqualität im dörflichen Neuss-Grefrath</h2>
+    <p>
+        Die Wohnung befindet sich im dörflich geprägten Neuss-Grefrath. Diese Wohnlage verbindet charmanten, ländlichen Charakter mit einer erstklassigen Infrastruktur und einem extrem hohen Freizeitwert. Eine Grundschule sowie zwei Kindergärten befinden sich direkt vor Ort, was die Umgebung besonders familienfreundlich macht.
+    </p>
+    <p><strong>Nahversorgung & Gesundheit vor Ort:</strong><br>
+        Der nahegelegene Ortskern sichert die Grundversorgung für den Alltag. Neben einem Friseur und einer Änderungsschneiderei samt Poststelle finden Sie hier unter anderem eine mehrfach ausgezeichnete Metzgerei. Auch die medizinische Versorgung ist optimal: Ein Hausarzt sowie ein Zahnarzt sind in nur etwa vier Gehminuten erreichbar. Für größere Wocheneinkäufe stehen im benachbarten Holzheim ein Rewe- und ein Aldi-Markt zur Verfügung (ca. 5 Fahrminuten). Ein besonderes Highlight ist der nur 600 Meter entfernte Blumenhof Bakker, auf dem jeden Dienstag der regionale Hofmarkt stattfindet und frische Produkte anbietet.
+    </p>
+    <p><strong>Mobilität & Verkehrsanbindung:</strong><br>
+        Die nächstgelegene Bushaltestelle ist nur rund 170 Meter entfernt. Von dort aus erreichen Sie die Neusser Innenstadt in circa 12 Minuten. Weitere Buslinien führen in die umliegenden Orte bis nach Jüchen und Mönchengladbach. Autofahrer profitieren von der schnellen Anbindung an die Autobahn A46 (ca. 1,6 km entfernt), über die Sie die Düsseldorfer Innenstadt in rund 20 Minuten und Köln in etwa 40 Minuten erreichen.
+    </p>
+    <p><strong>Freizeit & Erholung:</strong><br>
+        Die Umgebung bietet abwechslungsreiche Freizeitmöglichkeiten: Der bekannte Snowworld Neuss (Skihalle, Almgolf, FunFußball, Abenteuer Alm) liegt nur 1,3 Kilometer entfernt. Den geschichtsträchtigen Golfpark Rittergut Birkhof inklusive Gastronomie erreichen Sie nach ca. zwei Kilometern. Zudem lädt die idyllische Umgebung zu ausgedehnten Fahrradtouren ein – beliebte Ausflugsziele wie Schloss Dyck, Schloss Rheydt oder der historische Ort Liedberg liegen im nahen Umkreis und bieten eine tolle Lebensqualität direkt vor der Haustür.
+    </p>
+
+    <h2>Grundriss</h2>
+    <div class="single-image-box">
+        <img src="grundriss.png" alt="Grundriss der Wohnung">
+    </div>
+
+    <h2>Eckdaten & Energiedaten</h2>
+    <table>
+        <tr>
+            <th>Etage:</th>
+            <td>2. Geschoss (Dachgeschoss)</td>
+        </tr>
+        <tr>
+            <th>Verfügbar ab:</th>
+            <td>Voraussichtlich ab 01.11.2026 (Bezug nach Absprache)</td>
+        </tr>
+        <tr>
+            <th>Baujahr Gebäude:</th>
+            <td>1973</td>
+        </tr>
+        <tr>
+            <th>Heizungsart:</th>
+            <td>Zentralheizung (Gas, erneuert 2015)</td>
+        </tr>
+        <tr>
+            <th>Energieausweistyp:</th>
+            <td>Verbrauchsausweis</td>
+        </tr>
+        <tr>
+            <th>Endenergieverbrauch:</th>
+            <td>104,20 kWh/(m²·a)</td>
+        </tr>
+        <tr>
+            <th>Energieeffizienzklasse:</th>
+            <td>D</td>
+        </tr>
+    </table>
+
+    <h2>Mietkonditionen & Kostenübersicht</h2>
+    <table>
+        <tr>
+            <th>Nettokaltmiete:</th>
+            <td>775,00 €</td>
+        </tr>
+        <tr>
+            <th>Nebenkostenvorauszahlung:</th>
+            <td>170,00 €</td>
+        </tr>
+        <tr>
+            <th>Heizkosten:</th>
+            <td>In den Nebenkosten enthalten</td>
+        </tr>
+        <tr>
+            <th>Gesamtmiete (Wohnung warm):</th>
+            <td><strong>945,00 €</strong></td>
+        </tr>
+        <tr>
+            <th>Garage (separater Mietvertrag):</th>
+            <td>90,00 €</td>
+        </tr>
+        <tr>
+            <th>Kaution:</th>
+            <td>2.325,00 € (3 Nettokaltmieten)</td>
+        </tr>
+    </table>
+
+    <h2>Kontakt & Besichtigung</h2>
+    <p>
+        Besichtigungstermine sind nach vorheriger Absprache flexibel möglich. Bitte senden Sie uns eine Anfrage mit Ihren vollständigen Kontaktdaten und einer kurzen Beschreibung zu Ihrer Person (Berufstätigkeit, Anzahl der einziehenden Personen).
+    </p>
+
+    <p>
+        <strong>Ansprechpartner:</strong> Dirk Breuer<br>
+        <strong>Telefon:</strong> <a href="tel:01726241131" class="contact-link">0172 6241131</a><br>
+        <strong>E-Mail:</strong> <a href="mailto:immo_neuss_grefrath@gmx.de" class="contact-link">immo_neuss_grefrath@gmx.de</a>
+    </p>
+
+    <h2>Impressionen & Einrichtungsbeispiele (Virtual Staging)</h2>
+    <p><em>Hinweis: Klicken Sie auf ein beliebiges Bild, um es in voller Größe anzuzeigen.</em></p>
+
+    <h3>Flur</h3>
+    <div class="image-grid">
+        <div class="image-item">
+            <img src="leere_wohnung/1 Flur 1.webp" alt="Flur leer">
+            <div class="image-label">Flur</div>
+        </div>
+        <div class="image-item">
+            <img src="leere_wohnung/2 Flur 2.webp" alt="Flur leer 2">
+            <div class="image-label">Flur 2</div>
+        </div>
+        <div class="image-item">
+            <img src="ki_bilder/1 Flur KI.webp" alt="Flur eingerichtet">
+            <div class="image-label">Einrichtungsbeispiel (KI)</div>
+        </div>
+    </div>
+
+    <h3>Küche</h3>
+    <div class="image-grid">
+        <div class="image-item">
+            <img src="leere_wohnung/3 Küche.webp" alt="Küche aktuell">
+            <div class="image-label">Küche</div>
+        </div>
+        <div class="image-item">
+            <img src="ki_bilder/2 Küche.webp" alt="Küche eingerichtet">
+            <div class="image-label">Einrichtungsbeispiel (KI)</div>
+        </div>
+    </div>
+
+    <h3>Wohnzimmer</h3>
+    <div class="image-grid">
+        <div class="image-item">
+            <img src="leere_wohnung/7 Wohnzimmer 1.webp" alt="Wohnzimmer leer Perspektive 1">
+            <div class="image-label">Wohnzimmer</div>
+        </div>
+        <div class="image-item">
+            <img src="ki_bilder/7 Wohnzimmer KI.webp" alt="Wohnzimmer eingerichtet">
+            <div class="image-label">Einrichtungsbeispiel (KI)</div>
+        </div>
+        <div class="image-item">
+            <img src="ki_bilder/8 Wohnzimmer KI Alternative.webp" alt="Wohnzimmer eingerichtet Alternative">
+            <div class="image-label">Alternative Einrichtungsvariante (KI)</div>
+        </div>
+    </div>
+
+    <h3>Loggia</h3>
+    <div class="image-grid">
+        <div class="image-item">
+            <img src="leere_wohnung/9 Loggia 1.webp" alt="Loggia aktuell 1">
+            <div class="image-label">Loggia</div>
+        </div>
+        <div class="image-item">
+            <img src="leere_wohnung/10 Loggia 2.webp" alt="Loggia Detailansicht">
+            <div class="image-label">Loggia (Seitenblick)</div>
+        </div>
+        <div class="image-item">
+            <img src="ki_bilder/9 Loggia KI.webp" alt="Loggia möbliert">
+            <div class="image-label">Einrichtungsbeispiel (KI)</div>
+        </div>
+    </div>
+
+    <h3>Schlafzimmer</h3>
+    <div class="image-grid">
+        <div class="image-item">
+            <img src="leere_wohnung/5 Schlafzimmer.jpg" alt="Schlafzimmer leer">
+            <div class="image-label">Schlafzimmer</div>
+        </div>
+        <div class="image-item">
+            <img src="ki_bilder/5 Schlafzimmer KI.webp" alt="Schlafzimmer eingerichtet">
+            <div class="image-label">Einrichtungsbeispiel (KI)</div>
+        </div>
+    </div>
+
+    <h3>Badezimmer</h3>
+    <div class="image-grid">
+        <div class="image-item">
+            <img src="leere_wohnung/6 Bad.webp" alt="Badezimmer aktuell">
+            <div class="image-label">Badezimmer</div>
+        </div>
+        <div class="image-item">
+            <img src="ki_bilder/6 Bad KI.webp" alt="Badezimmer dekoriert">
+            <div class="image-label">Einrichtungsbeispiel (KI)</div>
+        </div>
+    </div>
+
+    <h3>Flexibles Drittes Zimmer (Arbeits- / Kinder- / Gästezimmer)</h3>
+    <p><em>Dieses Zimmer bietet Ihnen maximale Flexibilität je nach Lebenssituation:</em></p>
+    <div class="image-grid">
+        <div class="image-item">
+            <img src="leere_wohnung/4 Arbeitszimmer.webp" alt="Zimmer leer">
+            <div class="image-label">Drittes Zimmer</div>
+        </div>
+        <div class="image-item">
+            <img src="ki_bilder/4 Arbeitszimmer KI.webp" alt="Nutzung als Arbeitszimmer">
+            <div class="image-label">Variante A: Modernes Home-Office (KI)</div>
+        </div>
+        <div class="image-item">
+            <img src="ki_bilder/4 Gästezimmer mit Büro.webp" alt="Nutzung als Gästezimmer mit Büro">
+            <div class="image-label">Variante B: Gästezimmer kombiniert mit Büro (KI)</div>
+        </div>
+        <div class="image-item">
+            <img src="ki_bilder/4 Kinderzimmer KI.webp" alt="Nutzung als Kinderzimmer">
+            <div class="image-label">Variante C: Helles Kinderzimmer (KI)</div>
+        </div>
+    </div>
+
+    <h3>Keller & Garage</h3>
+    <div class="image-grid">
+        <div class="image-item">
+            <img src="leere_wohnung/13 Kellerabteil.webp" alt="Eigenes Kellerabteil">
+            <div class="image-label">Zusätzlicher Stauraum: Eigenes Kellerabteil</div>
+        </div>
+        <div class="image-item">
+            <img src="leere_wohnung/11 Garage.jpg" alt="Garage Außenansicht">
+            <div class="image-label">Eigene Garage (Anmietung optional)</div>
+        </div>
+        <div class="image-item">
+            <img src="leere_wohnung/12 Waschkeller.webp" alt="Gemeinschaftlicher Waschkeller">
+            <div class="image-label">Gemeinschaftlicher Waschkeller</div>
+        </div>
+        <div class="image-item">
+            <img src="leere_wohnung/14 Fahrradgarage.jpg" alt="Fahrradabstellplatz">
+            <div class="image-label">Extra Fahrradstellplatz in der Garage</div>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        Hinweis zum Drucken: Nutzen Sie die Druckfunktion Ihres Browsers (Strg + P bzw. Cmd + P) und wählen Sie "Als PDF speichern", um ein sauberes Dokument zu generieren.
+    </div>
+
+</div>
+
+<div class="lightbox" id="lightbox">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <img id="lightboxImg" src="" alt="Großansicht">
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxClose = document.getElementById('lightboxClose');
+        
+        // Alle Bilder auf der Seite auswählen (Sowohl im Grid als auch Einzelboxen)
+        const allImages = document.querySelectorAll('.image-item img, .single-image-box img');
+        
+        allImages.forEach(img => {
+            img.addEventListener('click', function() {
+                lightboxImg.src = this.src;
+                lightboxImg.alt = this.alt;
+                lightbox.style.display = 'flex';
+            });
+        });
+        
+        // Schließen beim Klick auf das 'X'
+        lightboxClose.addEventListener('click', function() {
+            lightbox.style.display = 'none';
+        });
+        
+        // Schließen beim Klick auf den dunklen Hintergrund
+        lightbox.addEventListener('click', function(e) {
+            if (e.target !== lightboxImg) {
+                lightbox.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
